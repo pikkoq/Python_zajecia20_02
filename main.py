@@ -1,3 +1,7 @@
+import functools
+
+import lorem_text.lorem
+
 from zadanie2 import *
 #zadanie 2
 print("Zadanie2")
@@ -83,3 +87,52 @@ def apply(data):
 def doFunction(fun ,arg):
     for f, v in zip(fun, arg):
         print(f(*v) if isinstance(v, tuple) else f(v))
+
+data = [1,2,3,4,5,6]
+doFunction([kwadrat, dodaj, add], [5,10, (10, 15)])
+
+#zadanie 8
+print("Zadanie 8")
+
+liczbyKwadratowe = [x*x for x in range(1, 11)]
+print(liczbyKwadratowe)
+
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+length = [len(slowo) for slowo in fruits]
+print(length)
+
+#zadanie 9
+print("Zadanie 9")
+
+def dziewiate():
+    lista = [2,5,7,2,8,11,6]
+    print("Najwieksza liczba: ", functools.reduce(lambda a,b: a if a > b else b, lista))
+    srednia = functools.reduce(lambda x,y : x+y, lista) / len(lista)
+    print("Srednia: ", srednia)
+dziewiate()
+
+#zadanie 10
+print("Zadanie 10")
+
+def fib():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+generator_fib = fib()
+for x in range(1000):
+    print(next(generator_fib))
+
+def write(filename):
+    with open(filename, "w") as file:
+        for x in range(1000):
+            file.write(lorem_text.lorem.paragraph() + '\n\n')
+#write("lorem.txt")
+
+def read(filename):
+    with open(filename, "r") as file:
+        for line in file:
+            yield line.strip()
+for line in read("lorem.txt"):
+    print(line)
